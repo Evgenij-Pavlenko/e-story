@@ -19,4 +19,8 @@ class Real : Film{
     constructor(name: String, price: Double, type: TypeFilmBox) : super(name, price) {
         this.type = type
     }
+
+    override fun toString(): String {
+        return "${super.toString()} Type Films Box: $type "
+    }
 }

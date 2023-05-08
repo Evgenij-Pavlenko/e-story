@@ -10,4 +10,8 @@ open class User{
         this.login = login
         this.password = password
     }
+
+    override fun toString(): String {
+        return "Name: ${this.name}, Login: ${this.login}"
+    }
 }

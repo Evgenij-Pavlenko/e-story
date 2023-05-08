@@ -19,4 +19,7 @@ open class Product {
         this.price = price
 
     }
+
+    override fun toString(): String {
+return "Names Product: $name, Price: $price"
 }
