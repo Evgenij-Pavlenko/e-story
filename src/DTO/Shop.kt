@@ -40,9 +40,16 @@ class Shop {
         return ret
     }
 
+    fun printProduct(){
+        for (productInMap in productMap){
+            println(productInMap.key)
+            for (product in productInMap.value){
+                println(product)
+            }
+            println("\n")
 
-}
+        }
+    }
 
-private operator fun Unit.set(indexProduct: Unit, value: Unit) {
 
 }

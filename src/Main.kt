@@ -48,29 +48,30 @@ fun main() {
 
 
     println("Add new Customer/operator")
-    println(
-        """
-        Change role:
-        [1] - Customer
-        [2] - Operator
-    """.trimIndent()
-    )
-    var role: Int = readLine()!!.toInt()
-    println("Enter name:")
-    var name = readln()
-    println("Enter login:")
-    var login = readln()
-    println("Enter password:")
-    var password = readln()
-    when (role) {
-        1 -> customers.add(Customer(name, login, password))
-        2 -> operators.add(Operator(name, login, password))
-    }
+//    println(
+//        """
+//        Change role:
+//        [1] - Customer
+//        [2] - Operator
+//    """.trimIndent()
+//    )
+//    var role: Int = readLine()!!.toInt()
+//    println("Enter name:")
+//    var name = readln()
+//    println("Enter login:")
+//    var login = readln()
+//    println("Enter password:")
+//    var password = readln()
+//    when (role) {
+//        1 -> customers.add(Customer(name, login, password))
+//        2 -> operators.add(Operator(name, login, password))
+//    }
 
     println(customers)
     println(operators)
 println("Products in Shop:")
 
-    println()
+    println(shop.productMap)
+    shop.printProduct()
 
 }

@@ -21,5 +21,6 @@ open class Product {
     }
 
     override fun toString(): String {
-return "Names Product: $name, Price: $price"
+        return "Names Product: $name, Price: $price €"
+    }
 }
