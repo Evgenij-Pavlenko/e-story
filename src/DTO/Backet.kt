@@ -18,7 +18,7 @@ class Backet {
         productInBacket.add(product)
     }
 
-    fun bucketSum(bucket: Backet): Double {
+    fun bucketSum(): Double {
         var sum = 0.0
         for (product in productInBacket) {
             sum += product.price

@@ -14,4 +14,8 @@ open class User{
     override fun toString(): String {
         return "Name: ${this.name}, Login: ${this.login}"
     }
+
+    fun checkPass(password: String): Boolean{
+        return this.password ==password
+    }
 }

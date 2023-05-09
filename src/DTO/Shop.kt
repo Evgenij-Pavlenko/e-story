@@ -1,6 +1,8 @@
 package DTO
 
 import DTO.products.Product
+import DTO.users.Customer
+import DTO.users.PayMethod
 import DTO.users.User
 
 class Shop {
@@ -47,7 +49,21 @@ class Shop {
                 println(product)
             }
             println("\n")
+        }
+    }
 
+    fun productToBacket(productName: String, customer: Customer, payMethod: PayMethod = PayMethod.PayPal){
+        for (productInMap in productMap){
+            println(productInMap.key)
+            for (product in productInMap.value){
+                if (product.name == productName){
+                    customer.payMethod.keys[payMethod] = customer.payMethod[payMethod.name]?.minus(product.price)
+                    customer.shoppingBasket.addInBacket(product)
+                    productInMap.value.remove(product)
+                }
+
+            }
+            println("\n")
         }
     }
 

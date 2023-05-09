@@ -2,46 +2,52 @@ import DTO.Shop
 import DTO.products.Film.Online
 import DTO.products.Film.Real
 import DTO.products.Film.TypeFilmBox.*
-import DTO.products.Product
 import DTO.products.electronic.Notebook
 import DTO.products.electronic.TV
 import DTO.users.Customer
 import DTO.users.Operator
+import utils.Methoden
+
+
+var customer1 = Customer("Alex Schmidt", "Alex", "Alex123")
+var customer2 = Customer("Nikol Stoun", "Nikol", "Nikol123")
+var operator1 = Operator("Max Rode", "Max", "Hard123")
+
+var notebook1 = Notebook("Lenovo", 1000.0, 15.0, 1.60)
+var notebook2 = Notebook("Dell", 1200.0, 15.4, 1.62)
+var tv1 = TV("Samsung", 550.0, 48)
+var tv2 = TV("Sharp", 500.0, 44)
+var onlineFilm1 = Online("The Matrix", 15.0, "http://e-shop/thematrix")
+var onlineFilm2 = Online("Star Wars", 14.99, "http://e-shop/starwars")
+var realFilm1 = Real("Hobbit", 20.0, DVD)
+var realFilm2 = Real("King of Rings", 19.0, CD)
+var realFilm3 = Real("Rembo", 25.0, VHS)
+
+var notebooks = mutableListOf(notebook1, notebook2)
+var tvs = mutableListOf(tv1, tv2)
+var onlineFilms = mutableListOf(onlineFilm1, onlineFilm2)
+var realFilms = mutableListOf(realFilm1, realFilm2, realFilm3)
+
+var customers = mutableListOf(customer1, customer2)
+var operators = mutableListOf(operator1)
+
 
 fun main() {
-    var customer1 = Customer("Alex Schmidt", "Alex", "Alex123")
-    var customer2 = Customer("Nikol Stoun", "Nikol", "Nikol123")
-    var operator1 = Operator("Max Rode", "Max", "Hard123")
+    var method = Methoden()
 
-    var notebook1 = Notebook("Lenovo", 1000.0, 15.0, 1.60)
-    var notebook2 = Notebook("Dell", 1200.0, 15.4, 1.62)
-    var tv1 = TV("Samsung", 550.0, 48)
-    var tv2 = TV("Sharp", 500.0, 44)
-    var onlineFilm1 = Online("The Matrix", 15.0, "http://e-shop/thematrix")
-    var onlineFilm2 = Online("Star Wars", 14.99, "http://e-shop/starwars")
-    var realFilm1 = Real("Hobbit", 20.0, DVD)
-    var realFilm2 = Real("King of Rings", 19.0, CD)
-    var realFilm3 = Real("Rembo", 25.0, VHS)
-
-    var notebooks = mutableListOf(notebook1, notebook2)
-    var tvs = mutableListOf(tv1, tv2)
-    var onlineFilms = mutableListOf(onlineFilm1, onlineFilm2)
-    var realFilms = mutableListOf(realFilm1, realFilm2, realFilm3)
-
-    var customers = mutableListOf(customer1, customer2)
-    var operators = mutableListOf(operator1)
 
     var shop = Shop()
 
     shop.productMap = mutableMapOf(
-        "Notebook" to mutableListOf(notebook1, notebook2),
-        "tv" to mutableListOf(tv1, tv2),
-        "onlineFilms" to mutableListOf(onlineFilm1, onlineFilm2),
-        "realFilms" to mutableListOf(realFilm1, realFilm2, realFilm3)
+//        "Notebook" to mutableListOf(notebook1, notebook2),
+//        "Notebook" to notebooks, // Type mismatch. Required:  MutableList<Product> Found: MutableList<Notebooks>
+        "Notebook" to notebooks.toMutableList(),
+        "tv" to tvs.toMutableList(),
+        "onlineFilms" to onlineFilms.toMutableList(),
+        "realFilms" to realFilms.toMutableList()
     )
-//    shop.productList = mutableListOf(
-//        mutableListOf(notebook1,notebook2), tvs // Type mismatch. Required:  MutableList<Product> Found: MutableList<TV>
-//    )
+
+
 
 //    if ()
 //    shop.addProduct(notebook1)
@@ -69,9 +75,34 @@ fun main() {
 
     println(customers)
     println(operators)
-println("Products in Shop:")
+    println("Products in Shop:")
 
     println(shop.productMap)
     shop.printProduct()
 
+    println("Enter your Login")
+    var login = readln()
+    println("Enter your pasword")
+    var password = readln()
+    var check = false
+    var curentCustomer = method.chekPass(login, password)
+    while(!check){
+
+        if (curentCustomer!=null) {
+            println("User with Login: $login exists")
+            check = true
+        } else {
+            println("login or password does not match. Try again:")
+        }
+    }
+
+    println("Choose a product - enter its name:")
+    shop.printProduct()
+    var productName = readln()
+    shop.productToBacket(productName, curentCustomer)
+    println("In Backet Products:")
+    println(curentCustomer.shoppingBasket)
+    println("With Sum: ${curentCustomer.shoppingBasket.bucketSum()}")
+
 }
+
