@@ -1,15 +1,16 @@
 package DTO.users
 
-import DTO.Backet
+import Backet
 
 class Customer : User {
-    var payMethod: Map<PayMethod, Double> = mapOf(
+    var age = 0
+    var payMethod: MutableMap<PayMethod, Double> = mutableMapOf(
         PayMethod.PayPal to 1000.0
     )
     var shoppingBasket: Backet = Backet()
 
     //
-    constructor(name: String, login: String, password: String?, payMethod: Map<PayMethod, Double>) : super(
+    constructor(name: String, login: String, password: String?, payMethod: MutableMap<PayMethod, Double>) : super(
         name,
         login,
         password
@@ -17,11 +18,17 @@ class Customer : User {
         this.payMethod = payMethod
     }
 
-    constructor(name: String, login: String, password: String?) : super(
+    constructor(name: String, login: String, password: String?, age: Int) : super(
         name,
         login,
         password
-    )
+    ){
+        this.age = age
+    }
+
+    override fun toString(): String {
+        return "$shoppingBasket.n"
+    }
 
 
 }

@@ -1,4 +1,3 @@
-import DTO.Shop
 import DTO.products.Film.Online
 import DTO.products.Film.Real
 import DTO.products.Film.TypeFilmBox.*
@@ -9,8 +8,8 @@ import DTO.users.Operator
 import utils.Methoden
 
 
-var customer1 = Customer("Alex Schmidt", "Alex", "Alex123")
-var customer2 = Customer("Nikol Stoun", "Nikol", "Nikol123")
+var customer1 = Customer("Alex Schmidt", "Alex", "Alex123", 18)
+var customer2 = Customer("Nikol Stoun", "Nikol", "Nikol123", 11)
 var operator1 = Operator("Max Rode", "Max", "Hard123")
 
 var notebook1 = Notebook("Lenovo", 1000.0, 15.0, 1.60)
@@ -48,7 +47,6 @@ fun main() {
     )
 
 
-
 //    if ()
 //    shop.addProduct(notebook1)
 
@@ -79,16 +77,17 @@ fun main() {
 
     println(shop.productMap)
     shop.printProduct()
-
-    println("Enter your Login")
-    var login = readln()
-    println("Enter your pasword")
-    var password = readln()
     var check = false
-    var curentCustomer = method.chekPass(login, password)
-    while(!check){
+    var curentCustomer: Customer? = null
+    while (!check) {
+        println("Enter your Login")
+        var login = readln()
+        println("Enter your pasword")
+        var password = readln()
 
-        if (curentCustomer!=null) {
+        curentCustomer = method.chekPass(login, password)
+
+        if (curentCustomer != null) {
             println("User with Login: $login exists")
             check = true
         } else {
@@ -96,13 +95,43 @@ fun main() {
         }
     }
 
-    println("Choose a product - enter its name:")
-    shop.printProduct()
-    var productName = readln()
-    shop.productToBacket(productName, curentCustomer)
-    println("In Backet Products:")
-    println(curentCustomer.shoppingBasket)
-    println("With Sum: ${curentCustomer.shoppingBasket.bucketSum()}")
 
+    shop.printProduct()
+
+
+    var productName = ""
+    do {
+        if (curentCustomer != null) {
+            if (curentCustomer.age < 12) {
+                println("The action is allowed only to users over 12 years old")
+                break
+            }
+        }
+        println("Choose a product - enter its name or Enter \"quit\":")
+        productName = readln()
+        if (productName == "quit") break
+        if (curentCustomer != null) {
+            shop.productToBacket(productName, curentCustomer)
+        }
+
+    } while (productName != "quit")
+
+    println("In Backet Products:")
+    if (curentCustomer != null) {
+        curentCustomer.shoppingBasket.print()
+    }
+    if (curentCustomer != null) {
+        println("With Sum: ${curentCustomer.shoppingBasket.bucketSum()} \n")
+    }
+
+    println("Pay? yes/no")
+    var pay = readln()
+    if (pay == "yes") {
+        shop.pay(curentCustomer!!)
+    } else {
+        println("payment canceled")
+
+    }
 }
+
 

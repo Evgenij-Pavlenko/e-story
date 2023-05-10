@@ -1,5 +1,3 @@
-package DTO
-
 import DTO.products.Product
 import DTO.users.Customer
 import DTO.users.PayMethod
@@ -10,23 +8,23 @@ class Shop {
     var productMap: MutableMap<String, MutableList<Product>> = mutableMapOf()
     var productList: MutableList<Product> = mutableListOf()
     var userMap: MutableMap<String, MutableList<User>> = mutableMapOf()
-    var customerBacket = Backet()
+//    var customerBacket = Backet()
 
     fun addProduct(product: Product) {
         var nameProduct = product.javaClass.simpleName
         productMap[nameProduct]?.add(product)
     }
 
-    fun editProduct(product: Product, neueName: String):Boolean {
+    fun editProduct(product: Product, neueName: String): Boolean {
         // ob alles gut gelaufen ist
         var ret = false
         var nameProduct = product.javaClass.simpleName
         if (productMap[nameProduct]!!.contains(product)) {
-            var indexProduct =  productMap[nameProduct]!!.indexOf(product)
+            var indexProduct = productMap[nameProduct]!!.indexOf(product)
             product.name = neueName
             productList = productMap[nameProduct]!!
             productList[indexProduct] = product
-           ret = true
+            ret = true
         }
         return ret
     }
@@ -42,29 +40,42 @@ class Shop {
         return ret
     }
 
-    fun printProduct(){
-        for (productInMap in productMap){
+    fun printProduct() {
+        for (productInMap in productMap) {
             println(productInMap.key)
-            for (product in productInMap.value){
+            for (product in productInMap.value) {
                 println(product)
             }
             println("\n")
         }
     }
 
-    fun productToBacket(productName: String, customer: Customer, payMethod: PayMethod = PayMethod.PayPal){
-        for (productInMap in productMap){
-            println(productInMap.key)
-            for (product in productInMap.value){
-                if (product.name == productName){
-                    customer.payMethod.keys[payMethod] = customer.payMethod[payMethod.name]?.minus(product.price)
+    fun productToBacket(productName: String, customer: Customer) {
+        for (productInMap in productMap) {
+
+            for (product in productInMap.value) {
+                if (product.name.lowercase() == productName.lowercase()) {
                     customer.shoppingBasket.addInBacket(product)
                     productInMap.value.remove(product)
                 }
-
             }
-            println("\n")
+            printProduct()
         }
+    }
+
+    fun pay(customer: Customer) {
+        if (customer.payMethod[PayMethod.PayPal]!! >= customer.shoppingBasket.bucketSum()) {
+            customer.payMethod[PayMethod.PayPal] =
+                customer.shoppingBasket.bucketSum() - customer.shoppingBasket.bucketSum()
+        } else {
+            var different = customer.shoppingBasket.bucketSum() - customer.shoppingBasket.bucketSum()
+            while (different>0) {
+                println("not enough funds on the account. Not enough $different Euro")
+                println("remove excess from the Backet:")
+                different -= customer.shoppingBasket.deleteFromBacket(this)
+            }
+        }
+        println("Customer geld: ${customer.payMethod[PayMethod.PayPal]}")
     }
 
 
