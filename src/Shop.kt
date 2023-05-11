@@ -8,7 +8,6 @@ class Shop {
     var productMap: MutableMap<String, MutableList<Product>> = mutableMapOf()
     var productList: MutableList<Product> = mutableListOf()
     var userMap: MutableMap<String, MutableList<User>> = mutableMapOf()
-//    var customerBacket = Backet()
 
     fun addProduct(product: Product) {
         var nameProduct = product.javaClass.simpleName
@@ -56,7 +55,7 @@ class Shop {
 
             for (product in productInMap.value) {
                 if (product.name.lowercase() == productName.lowercase()) {
-                    customer.shoppingBasket.addInBacket(product)
+                    customer.shoppingBasket.addInBasket(product)
                     productInMap.value.remove(product)
                     break
                 }
@@ -67,17 +66,17 @@ class Shop {
 
     fun pay(customer: Customer): Boolean {
         var checkBacketAgain = false
-        if (customer.payMethod[PayMethod.PayPal]!! >= customer.shoppingBasket.bucketSum()) {
+        if (customer.payMethod[PayMethod.PayPal]!! >= customer.shoppingBasket.busketSum()) {
             customer.payMethod[PayMethod.PayPal] =
-                customer.payMethod[PayMethod.PayPal]!! - customer.shoppingBasket.bucketSum()
+                customer.payMethod[PayMethod.PayPal]!! - customer.shoppingBasket.busketSum()
             customer.shoppingBasket.print()
             println("\t has been purchased")
         } else {
-            var different = customer.shoppingBasket.bucketSum() - customer.payMethod[PayMethod.PayPal]!!
+            var different = customer.shoppingBasket.busketSum() - customer.payMethod[PayMethod.PayPal]!!
             while (different > 0.0) {
                 println("not enough funds on the account. Not enough $different Euro")
                 println("remove excess from the Backet:")
-                different -= customer.shoppingBasket.deleteFromBacket(this)
+                different -= customer.shoppingBasket.deleteFromBasket(this)
                 if (different <= 0.0) {
                     checkBacketAgain = true
                 }
@@ -87,7 +86,7 @@ class Shop {
         println("Customer geld: ${customer.payMethod[PayMethod.PayPal]}")
         if (!checkBacketAgain) {
             customer.shoppingBasket.clear()
-            if (customer.shoppingBasket.productInBacket.isEmpty()) {
+            if (customer.shoppingBasket.productInBasket.isEmpty()) {
                 println("Backet is Empty")
             }
         }

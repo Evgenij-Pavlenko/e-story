@@ -97,12 +97,12 @@ class Methoden {
             curentCustomer.shoppingBasket.print()
         }
         if (curentCustomer != null) {
-            println("With Sum: ${curentCustomer.shoppingBasket.bucketSum()} Euro\n")
+            println("With Sum: ${curentCustomer.shoppingBasket.busketSum()} Euro\n")
         }
     }
 
     fun pay(curentCustomer: Customer, shop: Shop) {
-        if (curentCustomer.shoppingBasket.productInBacket.isNotEmpty()) {
+        if (curentCustomer.shoppingBasket.productInBasket.isNotEmpty()) {
             println("Pay? yes/no")
             var pay = readln()
             if (pay == "yes") {
