@@ -1,6 +1,6 @@
 package DTO.users
 
-open class User{
+open class User {
     var name: String = ""
     var login: String = ""
     private var password: String? = null
@@ -15,7 +15,7 @@ open class User{
         return "Name: ${this.name}, Login: ${this.login}"
     }
 
-    fun checkPass(password: String): Boolean{
-        return this.password ==password
+    fun checkPass(password: String): Boolean {
+        return this.password == password
     }
 }

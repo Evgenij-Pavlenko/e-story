@@ -14,7 +14,7 @@ class Customer : User {
         name,
         login,
         password
-    ){
+    ) {
         this.payMethod = payMethod
     }
 
@@ -22,12 +22,12 @@ class Customer : User {
         name,
         login,
         password
-    ){
+    ) {
         this.age = age
     }
 
-    override fun toString(): String {
-        return "$shoppingBasket.n"
+    fun printBacket(): String {
+        return "${shoppingBasket.print()}"
     }
 
 

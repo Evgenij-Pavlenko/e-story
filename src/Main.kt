@@ -34,104 +34,36 @@ var operators = mutableListOf(operator1)
 fun main() {
     var method = Methoden()
 
-
     var shop = Shop()
 
     shop.productMap = mutableMapOf(
-//        "Notebook" to mutableListOf(notebook1, notebook2),
-//        "Notebook" to notebooks, // Type mismatch. Required:  MutableList<Product> Found: MutableList<Notebooks>
         "Notebook" to notebooks.toMutableList(),
         "tv" to tvs.toMutableList(),
         "onlineFilms" to onlineFilms.toMutableList(),
         "realFilms" to realFilms.toMutableList()
     )
 
+    method.addNewUser(customers, operators)
 
-//    if ()
-//    shop.addProduct(notebook1)
-
-
-    println("Add new Customer/operator")
-//    println(
-//        """
-//        Change role:
-//        [1] - Customer
-//        [2] - Operator
-//    """.trimIndent()
-//    )
-//    var role: Int = readLine()!!.toInt()
-//    println("Enter name:")
-//    var name = readln()
-//    println("Enter login:")
-//    var login = readln()
-//    println("Enter password:")
-//    var password = readln()
-//    when (role) {
-//        1 -> customers.add(Customer(name, login, password))
-//        2 -> operators.add(Operator(name, login, password))
-//    }
-
-    println(customers)
-    println(operators)
-    println("Products in Shop:")
-
-    println(shop.productMap)
-    shop.printProduct()
-    var check = false
-    var curentCustomer: Customer? = null
-    while (!check) {
-        println("Enter your Login")
-        var login = readln()
-        println("Enter your pasword")
-        var password = readln()
-
-        curentCustomer = method.chekPass(login, password)
-
-        if (curentCustomer != null) {
-            println("User with Login: $login exists")
-            check = true
-        } else {
-            println("login or password does not match. Try again:")
-        }
-    }
-
+    println("Customers: $customers")
+    println("Operators: $operators")
 
     shop.printProduct()
 
+    var curentCustomer: Customer? = method.checkPassword()
 
-    var productName = ""
-    do {
-        if (curentCustomer != null) {
-            if (curentCustomer.age < 12) {
-                println("The action is allowed only to users over 12 years old")
-                break
-            }
-        }
-        println("Choose a product - enter its name or Enter \"quit\":")
-        productName = readln()
-        if (productName == "quit") break
-        if (curentCustomer != null) {
-            shop.productToBacket(productName, curentCustomer)
-        }
+    method.showOneCategory(shop)
 
-    } while (productName != "quit")
+    method.choseProduct(curentCustomer, shop)
 
-    println("In Backet Products:")
+
     if (curentCustomer != null) {
-        curentCustomer.shoppingBasket.print()
-    }
-    if (curentCustomer != null) {
-        println("With Sum: ${curentCustomer.shoppingBasket.bucketSum()} \n")
+        method.pay(curentCustomer, shop)
     }
 
-    println("Pay? yes/no")
-    var pay = readln()
-    if (pay == "yes") {
-        shop.pay(curentCustomer!!)
-    } else {
-        println("payment canceled")
+    println("Thank you for visiting our store!")
 
-    }
+
 }
 
 

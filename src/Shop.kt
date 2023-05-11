@@ -41,6 +41,7 @@ class Shop {
     }
 
     fun printProduct() {
+        println("\nProducts in Shop:\n")
         for (productInMap in productMap) {
             println(productInMap.key)
             for (product in productInMap.value) {
@@ -57,25 +58,52 @@ class Shop {
                 if (product.name.lowercase() == productName.lowercase()) {
                     customer.shoppingBasket.addInBacket(product)
                     productInMap.value.remove(product)
+                    break
                 }
             }
-            printProduct()
         }
+        printProduct()
     }
 
-    fun pay(customer: Customer) {
+    fun pay(customer: Customer): Boolean {
+        var checkBacketAgain = false
         if (customer.payMethod[PayMethod.PayPal]!! >= customer.shoppingBasket.bucketSum()) {
             customer.payMethod[PayMethod.PayPal] =
-                customer.shoppingBasket.bucketSum() - customer.shoppingBasket.bucketSum()
+                customer.payMethod[PayMethod.PayPal]!! - customer.shoppingBasket.bucketSum()
+            customer.shoppingBasket.print()
+            println("\t has been purchased")
         } else {
-            var different = customer.shoppingBasket.bucketSum() - customer.shoppingBasket.bucketSum()
-            while (different>0) {
+            var different = customer.shoppingBasket.bucketSum() - customer.payMethod[PayMethod.PayPal]!!
+            while (different > 0.0) {
                 println("not enough funds on the account. Not enough $different Euro")
                 println("remove excess from the Backet:")
                 different -= customer.shoppingBasket.deleteFromBacket(this)
+                if (different <= 0.0) {
+                    checkBacketAgain = true
+                }
+
             }
         }
         println("Customer geld: ${customer.payMethod[PayMethod.PayPal]}")
+        if (!checkBacketAgain) {
+            customer.shoppingBasket.clear()
+            if (customer.shoppingBasket.productInBacket.isEmpty()) {
+                println("Backet is Empty")
+            }
+        }
+
+        customer.shoppingBasket.print()
+        return checkBacketAgain
+    }
+
+    fun showOneCategory(nameCategory: String) {
+        for (category in productMap) {
+
+            if (category.key == nameCategory)
+                for (product in category.value) {
+                    println(product)
+                }
+        }
     }
 
 
