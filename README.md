@@ -62,7 +62,7 @@ Gesamtpreis an.
 
 3. Optionale, freiwillige Ergänzungen und Anmerkungen
    Selbstverständlich darfst du deinen Store mit deinen eigenen Ideen weiter ausschmücken.
-   Einige Ideen zur Erweiterung:
-   ● Gutscheincodes
-   ● Sonderangebote (z.B. “Kauf 3, zahl 2”)
+   Einige Ideen zur Erweiterung:</br>
+   ● Gutscheincodes</br>
+   ● Sonderangebote (z.B. “Kauf 3, zahl 2”)</br>
    ● Empfehlung von ähnlichen Produkten
