@@ -60,6 +60,7 @@ Unterkategorie).</br>
 ● Der Store erlaubt es Kunden, Produkte zu ihrem Warenkorb hinzuzufügen und zeigt den
 Gesamtpreis an.
 
+
 3. Optionale, freiwillige Ergänzungen und Anmerkungen
    Selbstverständlich darfst du deinen Store mit deinen eigenen Ideen weiter ausschmücken.
    Einige Ideen zur Erweiterung:</br>
