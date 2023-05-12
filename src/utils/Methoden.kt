@@ -80,7 +80,7 @@ class Methoden {
             if (curentCustomer != null) {
                 if (curentCustomer.age < 12) {
                     println("The action is allowed only to users over 12 years old")
-//                    checkPassword()
+                    checkPassword()
                     break
                 }
             }
