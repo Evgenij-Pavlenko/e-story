@@ -100,7 +100,7 @@ class Methoden {
                     break
                 }
             }
-            println("Choose a product - enter its name or Enter \"quit\":")
+            println("Choose a product to buy - enter its name or Enter \"quit\":")
             productName = readln()
             if (productName == "quit") break
             if (curentCustomer != null) {
