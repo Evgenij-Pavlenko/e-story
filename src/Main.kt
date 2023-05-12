@@ -61,7 +61,7 @@ fun main() {
         method.pay(curentCustomer, shop)
     }
 
-    println("Thank you for visiting our store!")
+    println("\nThank you for visiting our store!")
 
 
 }

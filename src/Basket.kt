@@ -25,10 +25,13 @@ class Basket {
     }
 
     fun print() {
-        println("In Backet Products:")
-        for (product in productInBasket) {
-            println("${product.name}: ${product.price}")
+        if (productInBasket.isNotEmpty()){
+            println("In Backet Products:")
+            for (product in productInBasket) {
+                println("${product.name}: ${product.price}")
+            }
         }
+
     }
 
     fun deleteFromBasket(shop: Shop): Double {
@@ -48,7 +51,7 @@ class Basket {
                 //add Product back in shop
                 shop.addProduct(product)
                 summDel = product.price
-                println("$product was deleted from Backet. Sum in Backet: ${busketSum()} Euro}")
+                println("$product was deleted from Backet. Sum in Backet: ${busketSum()} Euro")
                 break
             }
         }
