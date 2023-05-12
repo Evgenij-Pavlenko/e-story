@@ -28,7 +28,7 @@ class Basket {
         if (productInBasket.isNotEmpty()){
             println("In Backet Products:")
             for (product in productInBasket) {
-                println("${product.name}: ${product.price}")
+                println("${product.name}: ${product.price} €")
             }
         }
 

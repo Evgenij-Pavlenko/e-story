@@ -5,11 +5,13 @@ import DTO.products.electronic.Notebook
 import DTO.products.electronic.TV
 import DTO.users.Customer
 import DTO.users.Operator
+import DTO.users.PayMethod
 import utils.Methoden
 
 
 var customer1 = Customer("Alex Schmidt", "Alex", "Alex123", 18)
 var customer2 = Customer("Nikol Stoun", "Nikol", "Nikol123", 11)
+var customer3 = Customer("Ben White", "Ben", "Ben123", 30, mutableMapOf(PayMethod.PayPal to 2000.0))
 var operator1 = Operator("Max Rode", "Max", "Hard123")
 
 var notebook1 = Notebook("Lenovo", 1000.0, 15.0, 1.60)
@@ -27,7 +29,7 @@ var tvs = mutableListOf(tv1, tv2)
 var onlineFilms = mutableListOf(onlineFilm1, onlineFilm2)
 var realFilms = mutableListOf(realFilm1, realFilm2, realFilm3)
 
-var customers = mutableListOf(customer1, customer2)
+var customers = mutableListOf(customer1, customer2, customer3)
 var operators = mutableListOf(operator1)
 
 

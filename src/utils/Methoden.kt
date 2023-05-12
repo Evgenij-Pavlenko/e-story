@@ -50,7 +50,23 @@ class Methoden {
         println("Enter your name:")
         var name = readln()
         println("Enter your age:")
-        var age = readln().toInt()
+        var age = 0
+        var isAge = false
+        do{
+            try {
+                 age = readln().toInt()
+                if (age <= 0){
+                    throw Exception()
+                }else{
+                    isAge = true
+                }
+
+            }catch (ex: Exception){
+                println("age must be a number greater than 0")
+            }
+        }while (!isAge)
+
+
         println("Enter login:")
         var login = readln()
         println("Enter password:")

@@ -10,11 +10,12 @@ class Customer : User {
     var shoppingBasket: Basket = Basket()
 
     //
-    constructor(name: String, login: String, password: String?, payMethod: MutableMap<PayMethod, Double>) : super(
+    constructor(name: String, login: String, password: String?, age: Int, payMethod: MutableMap<PayMethod, Double>) : super(
         name,
         login,
         password
     ) {
+        this.age = age
         this.payMethod = payMethod
     }
 
